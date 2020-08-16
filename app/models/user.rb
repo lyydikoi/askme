@@ -21,5 +21,6 @@ class User < ApplicationRecord
 
   VALID_USER_REGEX = /\A[a-zA-Z0-9_]+\Z/i
   validates :username,  length: { maximum: 40 },
-                    format: { with: VALID_USER_REGEX }
+                    format: { with: VALID_USER_REGEX },
+                    uniqueness: { case_sensitive: false }
 end
