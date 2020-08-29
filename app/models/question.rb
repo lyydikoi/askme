@@ -9,5 +9,6 @@
 #  updated_at :datetime         not null
 #
 class Question < ApplicationRecord
-  validates :text, length: { maximum: 255 }
+  belongs_to :user
+  validates :text, presense: true, length: { maximum: 255 }
 end
