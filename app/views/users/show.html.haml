@@ -22,4 +22,8 @@
     .questions-list
       - @questions.each do |question|
         = render partial: 'questions/question', object: question
-        
+.column-3-4
+  = 'hello'
+  .user-questions
+    = @questions.count
+    = pluralize(@questions.count, "Вопрос", "Вопросов", "Вопроса")
