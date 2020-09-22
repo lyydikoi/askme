@@ -21,7 +21,8 @@ class User < ApplicationRecord
 
   attr_accessor :password
 
-  before_save :encrypt_password, :username_to_downcase
+  before_save :encrypt_password 
+  before_validation :username_to_downcase, :email_to_downcase
 
   validates :email, length: { maximum: 250 },
                     format: { with: VALID_EMAIL_REGEX },
@@ -33,10 +34,7 @@ class User < ApplicationRecord
                     uniqueness: true,
                     presence: true
 
-
-  validates :password, presence: true, on: :create
-
-  validates_confirmation_of :password
+  validates :password, presence: true, confirmtion: true, on: :create, :update
 
   # Служебный метод, преобразующий бинарную строку в шестнадцатиричный формат,
   # для удобства хранения.
@@ -61,20 +59,25 @@ class User < ApplicationRecord
   end
 
   private 
-    def encrypt_password
-      if password.present?
-        # случайная строка
-        self.password_salt = User.hash_to_string(OpenSSL::Random.random_bytes(16))
-        
-        self.password_hash = User.hash_to_string(
-          OpenSSL::PKCS5.pbkdf2_hmac(
-            password, password_salt, ITERATIONS, DIGEST.length, DIGEST
-          )
-        )
-      end
-    end
 
-    def username_to_downcase
-      self.username = self.username.downcase
+  def encrypt_password
+    if password.present?
+      # случайная строка
+      self.password_salt = User.hash_to_string(OpenSSL::Random.random_bytes(16))
+      
+      self.password_hash = User.hash_to_string(
+        OpenSSL::PKCS5.pbkdf2_hmac(
+          password, password_salt, ITERATIONS, DIGEST.length, DIGEST
+        )
+      )
     end
+  end
+
+  def username_to_downcase
+    self.username = self.username.downcase
+  end
+
+  def email_to_downcase
+    self.email = self.email.downcase
+  end
 end
