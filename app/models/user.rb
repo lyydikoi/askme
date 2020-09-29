@@ -33,7 +33,7 @@ class User < ApplicationRecord
                     uniqueness: true,
                     presence: true
 
-  validates :password, presence: true, confirmtion: true
+  validates :password, presence: true, confirmation: true
 
   # Служебный метод, преобразующий бинарную строку в шестнадцатиричный формат,
   # для удобства хранения.

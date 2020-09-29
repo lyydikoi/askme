@@ -9,15 +9,13 @@ module ApplicationHelper
   end
 
   def pluralize(num, nominative, genitive, accusative)
-    if num > 9 && num < 21
-      genitive
-    elsif (num == 1 || num % 10 == 1)
-      nominative
-    elsif(num > 1 && num < 5) || (num % 10 > 1 && num % 10 < 5)
-      accusative
-    else
-      genitive
-    end
+    return genitive if (11..14).include?(num % 100)
+  
+    last_digit = num % 10
+  
+    return nominative if last_digit == 1
+    return accusative if (2..4).include?(last_digit)
+    genitive
   end
   
 end
