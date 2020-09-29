@@ -11,14 +11,13 @@
 #
 require 'openssl'
 
-class User < ApplicationRecord
-  has_many :questions
-  
+class User < ApplicationRecord  
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   VALID_USER_REGEX = /\A[a-zA-Z0-9_]+\Z/i
   DIGEST = OpenSSL::Digest::SHA256.new
   ITERATIONS = 20_000
 
+  has_many :questions
   attr_accessor :password
 
   before_save :encrypt_password 
@@ -74,10 +73,10 @@ class User < ApplicationRecord
   end
 
   def username_to_downcase
-    self.username = self.username?.downcase unless self.username.nil?
+    self.username = self.username&.downcase
   end
 
   def email_to_downcase
-    self.email = self.email?.downcase unless self.email.nil?
+    self.email = self.email&.downcase
   end
 end
