@@ -2,12 +2,15 @@
 #
 # Table name: users
 #
-#  id         :bigint           not null, primary key
-#  name       :string
-#  username   :string
-#  email      :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id            :bigint           not null, primary key
+#  name          :string
+#  username      :string
+#  email         :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  avatar_url    :string
+#  password_hash :string
+#  password_salt :string
 #
 require 'openssl'
 
@@ -33,7 +36,7 @@ class User < ApplicationRecord
                     uniqueness: true,
                     presence: true
 
-  validates :password, presence: true, confirmation: true
+  #validates :password, presence: true, confirmation: true
 
   # Служебный метод, преобразующий бинарную строку в шестнадцатиричный формат,
   # для удобства хранения.
@@ -73,10 +76,10 @@ class User < ApplicationRecord
   end
 
   def username_to_downcase
-    self.username = self.username&.downcase
+    username&.downcase
   end
 
   def email_to_downcase
-    self.email = self.email&.downcase
+    email&.downcase
   end
 end
