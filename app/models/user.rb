@@ -26,10 +26,10 @@ class User < ApplicationRecord
   before_save :encrypt_password 
   before_validation :username_to_downcase, :email_to_downcase
 
-  validates :email, length: { maximum: 250 },
-                    format: { with: VALID_EMAIL_REGEX },
-                    uniqueness: true,
-                    presence: true
+  #validates :email, length: { maximum: 250 },
+                    #format: { with: VALID_EMAIL_REGEX },
+                    #uniqueness: true,
+                   #presence: true
 
   validates :username,  length: { maximum: 40 },
                     format: { with: VALID_USER_REGEX },
