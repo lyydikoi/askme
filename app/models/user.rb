@@ -26,17 +26,17 @@ class User < ApplicationRecord
   before_save :encrypt_password 
   before_validation :username_to_downcase, :email_to_downcase
 
-  #validates :email, length: { maximum: 250 },
-                    #format: { with: VALID_EMAIL_REGEX },
-                    #uniqueness: true,
-                   #presence: true
+  validates :email, length: { maximum: 250 },
+                    format: { with: VALID_EMAIL_REGEX },
+                    uniqueness: true,
+                    presence: true
 
   validates :username,  length: { maximum: 40 },
                     format: { with: VALID_USER_REGEX },
                     uniqueness: true,
                     presence: true
 
-  #validates :password, presence: true, confirmation: true
+  validates :password, presence: true, confirmation: true
 
   # Служебный метод, преобразующий бинарную строку в шестнадцатиричный формат,
   # для удобства хранения.
