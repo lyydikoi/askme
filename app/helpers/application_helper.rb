@@ -17,5 +17,9 @@ module ApplicationHelper
     return accusative if (2..4).include?(last_digit)
     genitive
   end
+
+  def fa_icon(icon_class)
+    content_tag 'span', '', class: "fa fa-#{icon_class}"
+  end
   
 end
