@@ -6,6 +6,9 @@ ruby '2.7.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 
+# Shows detailed logs on Heroku
+gem 'rails_12factor'
+
 gem 'uglifier'
 
 # Postgres DB
@@ -60,6 +63,9 @@ group :development do
   
   # This gem allows generating documentation, like class diagrams and such
   gem 'railroady', '~> 1.4', '>= 1.4.2'
+end
+
+group :production do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
