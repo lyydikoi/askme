@@ -18,6 +18,7 @@ require 'openssl'
 class User < ApplicationRecord  
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   VALID_USER_REGEX = /\A[a-zA-Z0-9_]+\Z/i
+  VALID_RGB_COLOR_REGEX = /\A#?(?:[A-F0-9]{3}){1,2}\z/i
   DIGEST = OpenSSL::Digest::SHA256.new
   ITERATIONS = 20_000
 
@@ -40,6 +41,8 @@ class User < ApplicationRecord
 
   validates :password, presence: true, on: :create
   validates :password, confirmation: true
+
+  validates :color, allow_blank: true, format: { with: VALID_RGB_COLOR_REGEX }, on: :update
 
   # Служебный метод, преобразующий бинарную строку в шестнадцатиричный формат,
   # для удобства хранения.
