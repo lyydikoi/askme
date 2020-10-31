@@ -11,6 +11,7 @@
 #  avatar_url    :string
 #  password_hash :string
 #  password_salt :string
+#  color         :string
 #
 require 'openssl'
 
