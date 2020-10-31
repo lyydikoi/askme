@@ -1,6 +1,9 @@
 .container.content-wrapper.buffer-both
   %h1.title-medium Править профиль
   .column-1-2
+    .user-actions
+      = link_to fa_icon('trash-o', "Удалить аккаунт"), user_path(), method: :delete,               |
+        data: {confirm: 'Действительно удалить аккаунт со всей информацией?'}   |
     = form_for(@user) do |f|
       - if @user.errors.any?
         .form-errors

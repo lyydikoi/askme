@@ -23,7 +23,7 @@ class User < ApplicationRecord
 
   attr_accessor :password
 
-  has_many :questions
+  has_many :questions, dependent: :destroy
 
   before_save :encrypt_password 
   before_validation :username_to_downcase, :email_to_downcase
