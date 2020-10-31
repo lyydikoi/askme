@@ -21,8 +21,9 @@ class User < ApplicationRecord
   DIGEST = OpenSSL::Digest::SHA256.new
   ITERATIONS = 20_000
 
-  has_many :questions
   attr_accessor :password
+
+  has_many :questions
 
   before_save :encrypt_password 
   before_validation :username_to_downcase, :email_to_downcase
@@ -37,7 +38,8 @@ class User < ApplicationRecord
                     uniqueness: true,
                     presence: true
 
-  validates :password, presence: true, confirmation: true
+  validates :password, presence: true, on: :create
+  validates :password, confirmation: true
 
   # Служебный метод, преобразующий бинарную строку в шестнадцатиричный формат,
   # для удобства хранения.
