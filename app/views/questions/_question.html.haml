@@ -7,6 +7,10 @@
         = question.answer
     .question-date
       = l(question.created_at, format: :short)
+    - if question.author.present?
+      .question-author
+        = link_to "Автор вопроса: #{ question.author.username}", user_path( question.author)
+      
   - if question.user == current_user
     - edit_icon = question.answer.blank? ? 'reply' : 'pencil'
     .question-actions
