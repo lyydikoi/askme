@@ -8,9 +8,8 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(question_params)
-    if current_user 
-      @question.author = current_user
-    end
+
+    @question.author = current_user
   
     if @question.save
       redirect_to user_path(@question.user), notice: 'Вопрос задан'
