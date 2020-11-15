@@ -42,8 +42,7 @@ class User < ApplicationRecord
   validates :password, presence: true, on: :create
   validates :password, confirmation: true
 
-  validates :color, allow_blank: true, format: { with: VALID_RGB_COLOR_REGEX }, on: :update
-
+  validates :color, allow_blank: true, format: { with: VALID_RGB_COLOR_REGEX }
   # Служебный метод, преобразующий бинарную строку в шестнадцатиричный формат,
   # для удобства хранения.
   def self.hash_to_string(password_hash)
