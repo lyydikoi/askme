@@ -12,7 +12,7 @@ module UsersHelper
     if user.avatar_url.present?
       user.avatar_url
     else
-      'https://robohash.org/112.png?set=set3'
+      "https://robohash.org/#{user.username}"
     end
   end
 
